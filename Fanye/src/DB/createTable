@@ -1,0 +1,41 @@
+CREATE TABLE users (
+  user_id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(80) NOT NULL,
+  display_name VARCHAR(50) NOT NULL,
+  password CHAR(41) NOT NULL,
+  PRIMARY KEY (user_id),
+  UNIQUE INDEX (email)
+) ENGINE=INNODB;
+
+CREATE TABLE university (
+  university_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(80) NOT NULL,
+  PRIMARY KEY (university_id)
+) ENGINE=INNODB;
+
+CREATE TABLE professor (
+  professor_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(80) NOT NULL,
+  PRIMARY KEY (professor_id)
+) ENGINE=INNODB;
+
+
+CREATE TABLE set (
+  set_id INT NOT NULL AUTO_INCREMENT,
+  university_id INT NOT NULL,
+  professor_id INT NOT NULL,
+  name VARCHAR(80) NOT NULL,
+  PRIMARY KEY (card_id),
+  Foreign Key (university_id) references university(university_id),
+  Foreign Key (professor_id) references professor(professor_id)
+) ENGINE=INNODB;
+
+
+CREATE TABLE card (
+  card_id INT NOT NULL AUTO_INCREMENT,
+  set_id INT NOT NULL,
+  term VARCHAR(80) NOT NULL,
+  definition VARCHAR(200) NOT NULL,
+  PRIMARY KEY (card_id),
+  Foreign Key (set_id) references SET(set_id)
+) ENGINE=INNODB; 
